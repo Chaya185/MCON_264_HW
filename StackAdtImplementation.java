@@ -29,7 +29,9 @@ public class StackAdtImplementation<T> {
         size++;
     }
 
+    //this method removes the top element
     public T pop(){
+        //throws an exception if the stack is empty
         if (isEmpty()) {
             throw new IllegalStateException("The stack is empty");
         }
@@ -40,7 +42,9 @@ public class StackAdtImplementation<T> {
         return element;
     }
 
+    //gets the top element without removing it
     public T peek(){
+        //throws an exception if the stack is empty
         if (isEmpty()) {
             throw new IllegalStateException("The stack is empty");
         }
