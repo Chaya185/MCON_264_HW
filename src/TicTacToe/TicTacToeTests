@@ -1,0 +1,70 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class TicTacToeTests {
+
+    @Test
+    public void testSetMark() {
+        ImplementBoard board = new ImplementBoard(3);
+        board.setMark(1, 1, 'X');
+        assertEquals('X', board.getSpecificValue(1, 1));
+    }
+
+    @Test
+    public void testIsBoardFull() {
+        ImplementBoard board = new ImplementBoard(3);
+        assertFalse(board.isBoardFull());
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board.setMark(i, j, 'X');
+            }
+        }
+        assertTrue(board.isBoardFull());
+    }
+
+    @Test
+    public void testResetBoard() {
+        ImplementBoard board = new ImplementBoard(3);
+        board.setMark(0, 0, 'X');
+        board.resetBoard();
+        assertEquals('-', board.getSpecificValue(0, 0));
+    }
+
+    @Test
+    public void testMakeMove() {
+        ImplementBoard board = new ImplementBoard(3);
+        ImplementPlayer player = new ImplementPlayer('X', board);
+        player.makeMove();
+        assertEquals('X', board.getSpecificValue(0, 0));
+    }
+
+    @Test
+    public void testIsValidMove() {
+        ImplementBoard board = new ImplementBoard(3);
+        ImplementPlayer player = new ImplementPlayer('X', board);
+        assertTrue(player.isValidMove(0, 0));
+        player.makeMove();
+        assertFalse(player.isValidMove(0, 0));
+    }
+
+    @Test
+    public void testUpdateScore() {
+        ImplementPlayer playerX = new ImplementPlayer('X', new ImplementBoard(3));
+        ImplementPlayer playerO = new ImplementPlayer('O', new ImplementBoard(3));
+        ImplementScoreKeeper scores = new ImplementScoreKeeper(playerX, playerO);
+        scores.updateScore('X');
+        assertEquals(1, scores.Xscore);
+        scores.updateScore('O');
+        assertEquals(1, scores.Oscore);
+    }
+
+    @Test
+    public void testDisplayScore() {
+        ImplementPlayer playerX = new ImplementPlayer('X', new ImplementBoard(3));
+        ImplementPlayer playerO = new ImplementPlayer('O', new ImplementBoard(3));
+        ImplementScoreKeeper scores = new ImplementScoreKeeper(playerX, playerO);
+        scores.updateScore('X');
+        scores.updateScore('O');
+        scores.displayScore();
+        // Manually check the console output
+    }
